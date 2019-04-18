@@ -7,8 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
-import javax.annotation.PostConstruct;
-
 @EnableCaching
 @SpringBootApplication
 @Slf4j
@@ -16,6 +14,9 @@ public class UltimateRedisApplication implements CommandLineRunner {
 
     @Autowired
     CacheService cacheService;
+
+    @Autowired
+    ControlledCacheService controlledCacheService;
 
     public static void main(String[] args) {
         SpringApplication.run(UltimateRedisApplication.class, args);
@@ -28,5 +29,22 @@ public class UltimateRedisApplication implements CommandLineRunner {
         String secondString = cacheService.cacheThis();
         log.info("Second: {}", secondString);
 
+        log.info("Starting controlled cache: -----------");
+        String controlledFirst = getFromControlledCache();
+        log.info("Controlled First: {}", controlledFirst);
+        String controlledSecond = getFromControlledCache();
+        log.info("Controlled Second: {}", controlledSecond);
+    }
+
+    private String getFromControlledCache() {
+        String fromCache = controlledCacheService.getFromCache();
+        if (fromCache == null) {
+            log.info("Oups - Cache was empty. Going to populate it");
+            String newValue = controlledCacheService.populateCache();
+            log.info("Populated Cache with: {}", newValue);
+            return newValue;
+        }
+        log.info("Returning from Cache: {}", fromCache);
+        return fromCache;
     }
 }
