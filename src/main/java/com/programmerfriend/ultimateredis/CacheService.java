@@ -1,6 +1,7 @@
 package com.programmerfriend.ultimateredis;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +13,10 @@ public class CacheService {
     public String cacheThis(){
         log.info("Returning NOT from cache!");
         return "this Is it";
+    }
+
+    @CacheEvict(cacheNames = "myCache")
+    public void forgetAboutThis(){
+        log.info("Forgetting everything about this!");
     }
 }

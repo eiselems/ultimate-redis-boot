@@ -34,6 +34,10 @@ public class UltimateRedisApplication implements CommandLineRunner {
         log.info("Controlled First: {}", controlledFirst);
         String controlledSecond = getFromControlledCache();
         log.info("Controlled Second: {}", controlledSecond);
+
+        log.info("Clearing all cache entries:");
+        cacheService.forgetAboutThis();
+        controlledCacheService.removeFromCache();
     }
 
     private String getFromControlledCache() {
