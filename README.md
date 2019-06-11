@@ -3,7 +3,7 @@ This is an example repository to discover ways of interacting with Redis (from a
 
 The blog post about this repository can be found [HERE](https://programmerfriend.com/ultimate-guide-to-redis-cache-with-spring-boot-2-and-spring-data-redis/?gthb).
 
-![Spring Boot Redis](https://programmerfriend.com/wp-content/uploads/2019/01/redis-boot.png "Spring Boot Redis")
+![Spring Boot Redis](https://github.com/programmerfriend/programmerfriend.github.io/blob/master/img/content/robust-boot_title.png?raw=true "Spring Boot Redis")
 
 ## Run the service
 ```
